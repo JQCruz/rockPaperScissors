@@ -1,10 +1,51 @@
 .playerBoxes{
     display: flex;
+    padding: 60px;
+    justify-content: space-evenly;
+    width: 1200px;
+    flex-direction: row;
+    margin-bottom: auto;
 }
 
 .choice{
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     background-color: aqua;
     color: brown;
+    border-color: black;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    height: 1000px;
+    flex-direction: column;
+}
+
+.heading{
+    font-size: 48px;
+}
+
+body{
+    background-color: purple;
+}
+
+.scoreboard, #scoreboardH, #scoreboardC{
+    display: flex;
+}
+
+.scoreboard{
+    flex-direction: row;
+    gap: 40px;
+    margin-top: auto;
+}
+
+#scoreboardH, #scoreboardC{
+    font-size: 30px;
+    color: white;
+}
+
+#youWinOrLoseRound, #youWinOrLoseRound,
+    #youWinOrLoseGame{
+    font-size: 36px;
 }

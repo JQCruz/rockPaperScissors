@@ -48,12 +48,12 @@ function playGame(playerChoice)
     let computerChoice = (getComputerChoice());
     
     if(playerWin[playerChoice] === computerChoice){
-        console.log("you won the round")
+        document.getElementById("youWinOrLoseRound").innerHTML=("you won the round!")
         winCounter++;
         console.log(`Wins: ${winCounter} Losses: ${loseCounter}`);
     }
     else if(playerLost[playerChoice] === computerChoice){
-        console.log("you lost the round")
+        document.getElementById("youWinOrLoseRound").innerHTML=("you lost the round!")
         loseCounter++;
         console.log(`Wins: ${winCounter} Losses: ${loseCounter}`);
     }
@@ -65,20 +65,25 @@ function playGame(playerChoice)
 
 function gameOver(){
     if (winCounter == 5){
-        alert("You Win!")
+        document.getElementById("youWinOrLoseGame").innerHTML=("you won the game!")
         console.log("you win")
     }
     else if(loseCounter == 5){
-        alert("You lost :(")
+        document.getElementById("youWinOrLoseGame").innerHTML=("you lost the game!")
     }
 }
 
+function changeScoreboard(){
+    document.getElementById("scoreboardH").innerHTML = `Human: ${winCounter}`;
+    document.getElementById("scoreboardC").innerHTML = `Computer: ${loseCounter}`;
+}
 
 const choices = document.getElementsByClassName("choice");
 console.log(choices);
 for(let i = 0; i <= 2; i++){
     choices[i].addEventListener('click', function() {playGame(getPlayerChoice(this))});
     choices[i].addEventListener('click', function(){gameOver()});
+    choices[i].addEventListener('click', function(){changeScoreboard()});
 }
 
 
