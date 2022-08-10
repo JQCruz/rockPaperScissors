@@ -11,6 +11,11 @@
         <div class="heading">
             Fuck you play some rock paper scissors
         </div>
+        <div class="computerImage">
+            <div id="computerHeader">Computer Picked:</div>
+            <img src="" id="imageID">
+            <div id="computerFooter"></div>
+        </div>
         <div id="youWinOrLoseRound"></div>
         <div id="youWinOrLoseGame"></div>
         <div class="scoreboard">
@@ -22,9 +27,15 @@
             </div>
         </div>
         <div class="playerBoxes">
-            <button class="choice" value="rock">rock</button>
-            <button class="choice" value="paper">paper</button>
-            <button class="choice" value="scissor">scissor</button>
+            <div class="choice" data-value="rock">
+                <img value="rock" src="./images/rock.png">
+            </div>
+            <div class="choice" data-value="paper">
+                <img src="./images/paper.png">
+            </div>
+            <div class="choice" data-value="scissor">
+                <img src="./images/Scissors-Transparent.png">
+            </div>
         </div>
     </div> 
     <script src="./script.js"></script>

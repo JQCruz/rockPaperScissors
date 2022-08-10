@@ -13,6 +13,9 @@
     background-color: aqua;
     color: brown;
     border-color: black;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
 }
 
 .container{
@@ -48,4 +51,42 @@ body{
 #youWinOrLoseRound, #youWinOrLoseRound,
     #youWinOrLoseGame{
     font-size: 36px;
+}
+
+.choice img, .computerImage img{
+    width: 200px;
+    height: 200px;
+}
+
+.choice:hover{
+    background-color: rgba(0, 255, 255, 0.575);
+}
+
+.computerImage{
+    height: 200px;
+    width: 200px;
+    background-color: aqua;
+    color: brown;
+    border-color: black;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+img[src=""]{
+    display: none;
+}
+
+#computerHeader{
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#computerFooter{
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
