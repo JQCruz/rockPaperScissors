@@ -46,23 +46,26 @@ function getComputerChoice(){
 
 let winCounter = 0;
 let loseCounter = 0;
+let player = '';
 
-function getPlayerChoice(objButton){
+let getPC = function getPlayerChoice(objButton){
     let playerChoice = (objButton.getAttribute("data-value"));
     console.log(playerChoice);
-    return playerChoice;
+    player = playerChoice;
 }
 
-function playGame(playerChoice)
+
+
+let pG = function playGame(playerChoice)
 {
     let computerChoice = (getComputerChoice());
     
-    if(playerWin[playerChoice] === computerChoice){
+    if(playerWin[player] === computerChoice){
         document.getElementById("youWinOrLoseRound").innerHTML=("you won the round!")
         winCounter++;
         console.log(`Wins: ${winCounter} Losses: ${loseCounter}`);
     }
-    else if(playerLost[playerChoice] === computerChoice){
+    else if(playerLost[player] === computerChoice){
         document.getElementById("youWinOrLoseRound").innerHTML=("you lost the round!")
         loseCounter++;
         console.log(`Wins: ${winCounter} Losses: ${loseCounter}`);
@@ -75,7 +78,7 @@ function playGame(playerChoice)
 }
 
 let gameStatusOver = null
-function gameOver(){
+let gumOver = function gameOver(){
     if (winCounter == 5){
         document.getElementById("youWinOrLoseGame").innerHTML=("you won the game!")
         console.log("you win")
@@ -87,17 +90,19 @@ function gameOver(){
     }
 }
 
+
 function stopGame(){
     if(gameStatusOver === true){
         for(let i = 0; i<=2; i++){
-            choices[i].removeEventListener('click', );
-            choices[i].removeEventListener('click', );
-            choices[i].removeEventListener('click', );
+            choices[i].removeEventListener('click', gumOver );
+            choices[i].removeEventListener('click', changeScoor);
+            choices[i].removeEventListener('click', getPC);
+            choices[i].removeEventListener('click', pG);
         }
     }
 }
 
-function changeScoreboard(){
+let changeScoor = function changeScoreboard(){
     document.getElementById("scoreboardH").innerHTML = `Human: ${winCounter}`;
     document.getElementById("scoreboardC").innerHTML = `Computer: ${loseCounter}`;
 }
@@ -109,12 +114,16 @@ function changeComputerIcon(){
 const choices = document.getElementsByClassName("choice");
 console.log(choices);
 for(let i = 0; i <= 2; i++){
-    choices[i].addEventListener('click', function () {playGame(getPlayerChoice(this))});
-    choices[i].addEventListener('click', function () {gameOver()});
-    choices[i].addEventListener('click', function () {changeScoreboard()});
+    choices[i].addEventListener('click', function() {getPC(this)});
+    choices[i].addEventListener('click', pG);
+    choices[i].addEventListener('click', gumOver);
+    choices[i].addEventListener('click', changeScoor);
     choices[i].addEventListener('click', function () {stopGame()});
 }
 
+const replaybutton = document.getElementById("reload");
+
+replaybutton.addEventListener("click", function(){location.reload()});
 
 
 
