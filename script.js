@@ -20,36 +20,39 @@ const playerLost = {
     'scissor': 'rock'
 }
 
+gameStatusOver = false;
+
 function getComputerChoice(){
     const numberChoice = Math.floor(Math.random() * 3);
     let computerPicture = document.getElementById("imageID");
     let computerFooter = document.getElementById("computerFooter");
+    if(gameStatusOver === false){
+        if (numberChoice === 0){
+            computerPicture.src = "./images/rock.png";
+            computerFooter.innerText = "Rock";
+            return 'rock';
 
-    if (numberChoice === 0){
-        computerPicture.src = "./images/rock.png";
-        computerFooter.innerHTML = "Rock";
-        return 'rock';
-
+        }
+        else if (numberChoice === 1){
+            computerPicture.src = "./images/paper.png";
+            computerFooter.innerText = "Paper";
+            return 'paper';
+        }
+        else{
+            computerPicture.src = "./images/Scissors-Transparent.png";
+            computerFooter.innerText = "Scissor";
+            return 'scissor';
+        }
     }
-    else if (numberChoice === 1){
-        computerPicture.src = "./images/paper.png";
-        computerFooter.innerHTML = "Paper";
-        return 'paper';
-    }
-    else{
-        computerPicture.src = "./images/Scissors-Transparent.png";
-        computerFooter.innerHTML = "Scissor";
-        return 'scissor';
-    }
-
 }
 
 let winCounter = 0;
 let loseCounter = 0;
 let player = '';
 
-let getPC = function getPlayerChoice(objButton){
-    let playerChoice = (objButton.getAttribute("data-value"));
+let getPC = function getPlayerChoice(e){
+    let playerChoice = (e.currentTarget.getAttribute("data-value")); //Use currentTarget instead of target
+    //data-value is stored in the div, target tries to get value from the img.S
     console.log(playerChoice);
     player = playerChoice;
 }
@@ -59,13 +62,13 @@ let getPC = function getPlayerChoice(objButton){
 let pG = function playGame(playerChoice)
 {
     let computerChoice = (getComputerChoice());
-    
-    if(playerWin[player] === computerChoice){
+    if(gameStatusOver === false){
+    if(playerWin[player] === computerChoice && gameStatusOver === false){
         document.getElementById("youWinOrLoseRound").innerHTML=("you won the round!")
         winCounter++;
         console.log(`Wins: ${winCounter} Losses: ${loseCounter}`);
     }
-    else if(playerLost[player] === computerChoice){
+    else if(playerLost[player] === computerChoice && gameStatusOver === false){
         document.getElementById("youWinOrLoseRound").innerHTML=("you lost the round!")
         loseCounter++;
         console.log(`Wins: ${winCounter} Losses: ${loseCounter}`);
@@ -74,10 +77,8 @@ let pG = function playGame(playerChoice)
         console.log("draw")
         document.getElementById("youWinOrLoseRound").innerHTML=("Looks like a draw!")
     }
-
+    }
 }
-
-let gameStatusOver = null
 let gumOver = function gameOver(){
     if (winCounter == 5){
         document.getElementById("youWinOrLoseGame").innerHTML=("you won the game!")
@@ -91,17 +92,6 @@ let gumOver = function gameOver(){
 }
 
 
-function stopGame(){
-    if(gameStatusOver === true){
-        for(let i = 0; i<=2; i++){
-            choices[i].removeEventListener('click', gumOver );
-            choices[i].removeEventListener('click', changeScoor);
-            choices[i].removeEventListener('click', getPC);
-            choices[i].removeEventListener('click', pG);
-        }
-    }
-}
-
 let changeScoor = function changeScoreboard(){
     document.getElementById("scoreboardH").innerHTML = `Human: ${winCounter}`;
     document.getElementById("scoreboardC").innerHTML = `Computer: ${loseCounter}`;
@@ -111,14 +101,13 @@ function changeComputerIcon(){
 
 }
 
-const choices = document.getElementsByClassName("choice");
+const choices = document.querySelectorAll(".choice");
 console.log(choices);
 for(let i = 0; i <= 2; i++){
-    choices[i].addEventListener('click', function() {getPC(this)});
+    choices[i].addEventListener('click', getPC);
     choices[i].addEventListener('click', pG);
     choices[i].addEventListener('click', gumOver);
     choices[i].addEventListener('click', changeScoor);
-    choices[i].addEventListener('click', function () {stopGame()});
 }
 
 const replaybutton = document.getElementById("reload");
